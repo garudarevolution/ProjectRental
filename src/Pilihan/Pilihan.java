@@ -5,6 +5,7 @@
  */
 package Pilihan;
 
+
 /**
  *
  * @author Serildawn
@@ -53,6 +54,7 @@ public class Pilihan extends javax.swing.JFrame {
         jLabel4.setText("Tarifsewa");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PS3", "PS4" }));
+        jComboBox1.setSelectedIndex(-1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
