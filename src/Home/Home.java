@@ -5,6 +5,9 @@
  */
 package Home;
 
+import Login.Login;
+import Registrasi.Registrasi;
+
 /**
  *
  * @author Serildawn
@@ -27,24 +30,49 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        loginButton = new javax.swing.JButton();
+        registerButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("Login");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 139, 70, -1));
+        loginButton.setText("Login");
+        loginButton.setAutoscrolls(true);
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 70, -1));
 
-        jButton2.setText("Register");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, -1, -1));
+        registerButton.setText("Register");
+        registerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, -1, -1));
 
-        jLabel2.setText("Welcome to");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, -1, -1));
+        jLabel2.setText("Welcome to RentalPS");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        // TODO add your handling code here:
+        Registrasi Info = new Registrasi();
+        Info.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_registerButtonActionPerformed
+
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        // TODO add your handling code here:
+        Login Info = new Login();
+        Info.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -82,8 +110,8 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JButton registerButton;
     // End of variables declaration//GEN-END:variables
 }

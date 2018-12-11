@@ -133,6 +133,17 @@ public class Login extends javax.swing.JFrame {
             
             Pilihan Info = new Pilihan();
             Info.setVisible(true);
+            setVisible(false);
+        }
+        else if (password.contains("user") && (username.contains("user")))
+        {
+            jtxtIdUser.setText(null);
+            Passwordfield.setText(null);
+            systemExit();
+            
+            Pilihan Info = new Pilihan();
+            Info.setVisible(true);
+            setVisible(false);
         }
     }//GEN-LAST:event_jbtnOkActionPerformed
 
