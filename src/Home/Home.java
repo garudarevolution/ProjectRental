@@ -33,6 +33,7 @@ public class Home extends javax.swing.JFrame {
         loginButton = new javax.swing.JButton();
         registerButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jButtonExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -57,6 +58,14 @@ public class Home extends javax.swing.JFrame {
         jLabel2.setText("Welcome to RentalPS");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
+        jButtonExit.setText("Exit");
+        jButtonExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExitActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 90, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -73,6 +82,11 @@ public class Home extends javax.swing.JFrame {
         Info.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButtonExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,6 +124,7 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonExit;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton loginButton;
     private javax.swing.JButton registerButton;
