@@ -5,11 +5,14 @@
  */
 package Registrasi;
 
-import Pilihan.MenuAdmin;
-import Pilihan.Pilihan;
-import com.mysql.jdbc.PreparedStatement;
+import Home.Home;
+import Koneksi.Koneksi;
+import Login.Login;
+import static com.oracle.webservices.internal.api.message.MessageContextFactory.create;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,10 +20,11 @@ import javax.swing.JOptionPane;
  * @author Serildawn
  */
 public class Registrasi extends javax.swing.JFrame {
+    
 
-    /**
-     * Creates new form Registrasi
-     */
+    Koneksi connect = new Koneksi();
+   
+    
     public Registrasi() {
         initComponents();
     }
@@ -34,133 +38,131 @@ public class Registrasi extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        KonfirmasiPassword = new javax.swing.JLabel();
-        Password = new javax.swing.JLabel();
-        UsernameField = new javax.swing.JTextField();
-        Save = new javax.swing.JButton();
-        Exit = new javax.swing.JButton();
-        password = new javax.swing.JPasswordField();
-        kp = new javax.swing.JPasswordField();
-        Reset = new javax.swing.JButton();
+        usernametext = new javax.swing.JTextField();
+        submitButton1 = new javax.swing.JButton();
+        resetButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        backButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        passwordfield = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setText("Username");
-
-        KonfirmasiPassword.setText("KonfirmasiPassword");
-
-        Password.setText("Password");
-
-        Save.setText("Save");
-        Save.addActionListener(new java.awt.event.ActionListener() {
+        submitButton1.setText("Submit");
+        submitButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaveActionPerformed(evt);
+                submitButton1ActionPerformed(evt);
             }
         });
 
-        Exit.setText("Exit");
-        Exit.addActionListener(new java.awt.event.ActionListener() {
+        resetButton1.setText("Reset");
+        resetButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitActionPerformed(evt);
+                resetButton1ActionPerformed(evt);
             }
         });
 
-        password.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setFont(new java.awt.Font("Perpetua Titling MT", 0, 24)); // NOI18N
+        jLabel1.setText("Registrasi");
+
+        backButton2.setText("Back");
+        backButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordActionPerformed(evt);
+                backButton2ActionPerformed(evt);
             }
         });
 
-        Reset.setText("Reset");
-        Reset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ResetActionPerformed(evt);
-            }
-        });
+        jLabel3.setText("Username  :");
 
-        jLabel1.setText("Registrasi as");
+        jLabel4.setText("Password  :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Customers" }));
+        jLabel2.setText("Registrasi as :");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Customers", " " }));
         jComboBox1.setSelectedIndex(-1);
+
+        passwordfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordfieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(118, 118, 118))
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(Password))
-                        .addGap(105, 105, 105)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(UsernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(backButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                        .addComponent(resetButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)
+                        .addComponent(submitButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(KonfirmasiPassword)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(kp, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(167, 167, 167)
-                .addComponent(Save, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Reset)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(Exit)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(10, 10, 10))
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(21, 21, 21)
+                                        .addComponent(usernametext, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(passwordfield))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(UsernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Password)
-                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(KonfirmasiPassword)
-                    .addComponent(kp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Save)
-                    .addComponent(Exit)
-                    .addComponent(Reset))
-                .addContainerGap(46, Short.MAX_VALUE))
+                    .addComponent(jLabel3)
+                    .addComponent(usernametext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(passwordfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(110, 110, 110)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backButton2)
+                    .addComponent(resetButton1)
+                    .addComponent(submitButton1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_passwordActionPerformed
-
-    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
+    private void submitButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButton1ActionPerformed
         // TODO add your handling code here:
         if (jComboBox1.getSelectedItem().toString() == "Admin") {
             connect.buka_koneksi();
-            String sqlkode = "SELECT * from admin where username = '"+ jtxtIdUser.getText() +"' AND password = "
-                    + "'"+String.valueOf(Passwordfield.getPassword())+"'";
+        String sqlkode = "SELECT * from admin where username = '"+ usernametext.getText() +"' AND password = "
+                    + "'"+String.valueOf(passwordfield.getPassword())+"'";
             try {
             PreparedStatement mStatement = (PreparedStatement) connect.koneksi.prepareStatement(sqlkode);
             mStatement.executeQuery();
@@ -168,48 +170,33 @@ public class Registrasi extends javax.swing.JFrame {
             if (result.next()){
                 JOptionPane.showMessageDialog(null, "Registrasi BERHASIL !");
                 dispose();
-                new MenuAdmin().setVisible(true);
+                new Login().setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Registrasi GAGAL !");
             }
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,"Terjadi Kesalahan "+ex.getMessage());
         }  
-            
-            
-        } 
-        else if(jComboBox1.getSelectedItem().toString() == "Customers") {
-            connect.buka_koneksi();
-            String sqlkode = "SELECT * from users where username = '"+ jtxtIdUser.getText() +"' AND password = "
-                    + "'"+String.valueOf(Passwordfield.getPassword())+"'";
-            try {
-            PreparedStatement mStatement = (PreparedStatement) connect.koneksi.prepareStatement(sqlkode);
-            mStatement.executeQuery();
-            ResultSet result = mStatement.executeQuery();
-            if (result.next()){
-                JOptionPane.showMessageDialog(null, "Registrasi BERHASIL !");
-                dispose();
-                new Pilihan().setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Registrasi GAGAL !");
-            }        }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this,"Terjadi Kesalahan "+ex.getMessage());
-        } 
-        };                           
-    }//GEN-LAST:event_SaveActionPerformed
+        }
+    }//GEN-LAST:event_submitButton1ActionPerformed
 
-    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+    private void resetButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButton1ActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_ExitActionPerformed
-
-    private void ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetActionPerformed
-        // TODO add your handling code here:
-        UsernameField.setText("");
-        password.setText("");
-        kp.setText("");
+        
+        usernametext.setText("");
+        passwordfield.setText("");
         jComboBox1.setSelectedIndex(-1);
-    }//GEN-LAST:event_ResetActionPerformed
+    }//GEN-LAST:event_resetButton1ActionPerformed
+
+    private void backButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButton2ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        new Home().setVisible(true);
+    }//GEN-LAST:event_backButton2ActionPerformed
+
+    private void passwordfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordfieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,16 +234,15 @@ public class Registrasi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Exit;
-    private javax.swing.JLabel KonfirmasiPassword;
-    private javax.swing.JLabel Password;
-    private javax.swing.JButton Reset;
-    private javax.swing.JButton Save;
-    private javax.swing.JTextField UsernameField;
+    private javax.swing.JButton backButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField kp;
-    private javax.swing.JPasswordField password;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPasswordField passwordfield;
+    private javax.swing.JButton resetButton1;
+    private javax.swing.JButton submitButton1;
+    private javax.swing.JTextField usernametext;
     // End of variables declaration//GEN-END:variables
 }
