@@ -211,8 +211,6 @@ public class DataPeminjam extends javax.swing.JFrame {
     private void btnhapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhapusActionPerformed
         // TODO add your handling code here:
         jnama.setText("");
-        pria.setSelected(false);
-        wanita.setSelected(false);
         jalamat.setText("");
         jlama.setText("");
         jnohp.setText("");
