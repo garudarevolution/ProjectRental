@@ -4,17 +4,23 @@
  * and open the template in the editor.
  */
 package Login;
+import Koneksi.Koneksi;
+import Pilihan.MenuAdmin;
 import javax.swing.JOptionPane;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import Pilihan.Pilihan;
+import com.mysql.jdbc.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import static javax.management.remote.JMXConnectorFactory.connect;
 /**
  *
  * @author Asus-Pc
  */
 public class Login extends javax.swing.JFrame {
 
-    private Object jPassword;
+   Koneksi connect = new Koneksi();
 
     /**
      * Creates new form Login
@@ -42,6 +48,8 @@ public class Login extends javax.swing.JFrame {
         jbtnCancel = new javax.swing.JButton();
         Passwordfield = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -76,7 +84,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Password");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 102, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
         getContentPane().add(jtxtIdUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 172, 30));
 
         jbtnOk.setText("OK");
@@ -85,7 +93,7 @@ public class Login extends javax.swing.JFrame {
                 jbtnOkActionPerformed(evt);
             }
         });
-        getContentPane().add(jbtnOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 69, -1));
+        getContentPane().add(jbtnOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 69, -1));
 
         Exit.setText("Exit");
         Exit.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +101,7 @@ public class Login extends javax.swing.JFrame {
                 ExitActionPerformed(evt);
             }
         });
-        getContentPane().add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, -1));
+        getContentPane().add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(251, 180, 50, -1));
 
         jbtnCancel.setText("Cancel");
         jbtnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -101,11 +109,24 @@ public class Login extends javax.swing.JFrame {
                 jbtnCancelActionPerformed(evt);
             }
         });
-        getContentPane().add(jbtnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, -1, -1));
+        getContentPane().add(jbtnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, -1, -1));
         getContentPane().add(Passwordfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 172, 30));
 
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Serildawn\\Downloads\\Playstation-logo.png")); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 0, 450, 290));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 340, 60));
+
+        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Customers" }));
+        jComboBox1.setSelectedIndex(-1);
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 170, -1));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Login as");
+        jLabel4.setMaximumSize(new java.awt.Dimension(54, 14));
+        jLabel4.setMinimumSize(new java.awt.Dimension(54, 14));
+        jLabel4.setPreferredSize(new java.awt.Dimension(54, 14));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -123,28 +144,47 @@ public class Login extends javax.swing.JFrame {
 
     private void jbtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnOkActionPerformed
          // TODO add your handling code here:
-        String password = Passwordfield.getText();
-        String username = jtxtIdUser.getText();
-        if (password.contains("admin") && (username.contains("admin")))
-        {
-            jtxtIdUser.setText(null);
-            Passwordfield.setText(null);
-            systemExit();
+    
+        
+        if (jComboBox1.getSelectedItem().toString() == "Admin") {
+            connect.buka_koneksi();
+            String sqlkode = "SELECT * from admin where username = '"+ jtxtIdUser.getText() +"' AND password = "
+                    + "'"+String.valueOf(Passwordfield.getPassword())+"'";
+            try {
+            PreparedStatement mStatement = (PreparedStatement) connect.koneksi.prepareStatement(sqlkode);
+            mStatement.executeQuery();
+            ResultSet result = mStatement.executeQuery();
+            if (result.next()){
+                JOptionPane.showMessageDialog(null, "LOGIN BERHASIL !");
+                dispose();
+                new MenuAdmin().setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "LOGIN GAGAL !");
+            }
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,"Terjadi Kesalahan "+ex.getMessage());
+        }  
             
-            Pilihan Info = new Pilihan();
-            Info.setVisible(true);
-            setVisible(false);
-        }
-        else if (password.contains("user") && (username.contains("user")))
-        {
-            jtxtIdUser.setText(null);
-            Passwordfield.setText(null);
-            systemExit();
             
-            Pilihan Info = new Pilihan();
-            Info.setVisible(true);
-            setVisible(false);
-        }
+        } 
+        else if(jComboBox1.getSelectedItem().toString() == "Customers") {
+            connect.buka_koneksi();
+            String sqlkode = "SELECT * from users where username = '"+ jtxtIdUser.getText() +"' AND password = "
+                    + "'"+String.valueOf(Passwordfield.getPassword())+"'";
+            try {
+            PreparedStatement mStatement = (PreparedStatement) connect.koneksi.prepareStatement(sqlkode);
+            mStatement.executeQuery();
+            ResultSet result = mStatement.executeQuery();
+            if (result.next()){
+                JOptionPane.showMessageDialog(null, "LOGIN BERHASIL !");
+                dispose();
+                new Pilihan().setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "LOGIN GAGAL !");
+            }        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,"Terjadi Kesalahan "+ex.getMessage());
+        } 
+        };                           
     }//GEN-LAST:event_jbtnOkActionPerformed
 
     /**
@@ -185,11 +225,13 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Exit;
     private javax.swing.JPasswordField Passwordfield;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JButton jbtnCancel;
     private javax.swing.JButton jbtnOk;
     private javax.swing.JTextField jtxtIdUser;
