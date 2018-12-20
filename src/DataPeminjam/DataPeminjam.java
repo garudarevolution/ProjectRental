@@ -33,15 +33,12 @@ public class DataPeminjam extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jnama = new javax.swing.JTextField();
         jalamat = new javax.swing.JTextField();
         jnohp = new javax.swing.JTextField();
-        pria = new javax.swing.JRadioButton();
-        wanita = new javax.swing.JRadioButton();
         jlama = new javax.swing.JTextField();
         btnkeluar = new javax.swing.JButton();
         btnsimpan = new javax.swing.JButton();
@@ -59,8 +56,6 @@ public class DataPeminjam extends javax.swing.JFrame {
 
         jLabel3.setText("Nama");
 
-        jLabel4.setText("Jenis Kelamin");
-
         jLabel5.setText("Alamat");
 
         jLabel6.setText("No.HP");
@@ -72,10 +67,6 @@ public class DataPeminjam extends javax.swing.JFrame {
                 jnohpActionPerformed(evt);
             }
         });
-
-        pria.setText("Pria");
-
-        wanita.setText("Wanita");
 
         jlama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,7 +117,6 @@ public class DataPeminjam extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(jLabel8))
@@ -143,10 +133,6 @@ public class DataPeminjam extends javax.swing.JFrame {
                                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(pria)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(wanita))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnsimpan)
                                         .addGap(18, 18, 18)
@@ -174,17 +160,10 @@ public class DataPeminjam extends javax.swing.JFrame {
                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jnama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(pria)
-                                .addComponent(wanita)))
-                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jnama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jalamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -285,7 +264,6 @@ public class DataPeminjam extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
@@ -293,7 +271,5 @@ public class DataPeminjam extends javax.swing.JFrame {
     private javax.swing.JTextField jlama;
     private javax.swing.JTextField jnama;
     private javax.swing.JTextField jnohp;
-    private javax.swing.JRadioButton pria;
-    private javax.swing.JRadioButton wanita;
     // End of variables declaration//GEN-END:variables
 }
