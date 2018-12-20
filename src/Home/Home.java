@@ -6,7 +6,6 @@
 package Home;
 
 import Login.Login;
-import Registrasi.Registrasi;
 
 /**
  *
@@ -31,7 +30,6 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         loginButton = new javax.swing.JButton();
-        registerButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButtonExit = new javax.swing.JButton();
 
@@ -47,14 +45,6 @@ public class Home extends javax.swing.JFrame {
         });
         getContentPane().add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 70, -1));
 
-        registerButton.setText("Register");
-        registerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registerButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, -1, -1));
-
         jLabel2.setText("Welcome to RentalPS");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
@@ -64,17 +54,10 @@ public class Home extends javax.swing.JFrame {
                 jButtonExitActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 90, -1));
+        getContentPane().add(jButtonExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 90, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        // TODO add your handling code here:
-        Registrasi Info = new Registrasi();
-        Info.setVisible(true);
-        setVisible(false);
-    }//GEN-LAST:event_registerButtonActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
@@ -127,6 +110,5 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButtonExit;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton loginButton;
-    private javax.swing.JButton registerButton;
     // End of variables declaration//GEN-END:variables
 }
