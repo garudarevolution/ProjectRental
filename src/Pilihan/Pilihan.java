@@ -5,6 +5,8 @@
  */
 package Pilihan;
 
+import DataPeminjam.DataPeminjam;
+
 
 
 /**
@@ -60,6 +62,11 @@ public class Pilihan extends javax.swing.JFrame {
         jComboBox1.setSelectedIndex(-1);
 
         jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         Logout.setText("Logout");
         Logout.addActionListener(new java.awt.event.ActionListener() {
@@ -148,6 +155,12 @@ public class Pilihan extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_LogoutActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DataPeminjam Info = new DataPeminjam ();
+        Info.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
