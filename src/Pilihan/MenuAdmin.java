@@ -116,12 +116,14 @@ public class MenuAdmin extends javax.swing.JFrame {
     private void sewaButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sewaButton3ActionPerformed
         // TODO add your handling code here:
         dispose();
+        new Transaksi().setVisible(true);
         
     }//GEN-LAST:event_sewaButton3ActionPerformed
 
     private void alatButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alatButton5ActionPerformed
         // TODO add your handling code here:
         dispose();
+        new Alat().setVisible(true);
         
     }//GEN-LAST:event_alatButton5ActionPerformed
 
