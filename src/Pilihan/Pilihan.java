@@ -27,8 +27,7 @@ public class Pilihan extends javax.swing.JFrame {
         this.jTable1.setModel(model);
         model.addColumn("ID PS");
         model.addColumn("Jenis PS");
-        model.addColumn("Model PS");
-        model.addColumn("Harga Alat");
+        model.addColumn("Harga PS");
  
         ambil_data();
     }
@@ -46,8 +45,7 @@ public class Pilihan extends javax.swing.JFrame {
                 Object[] o = new Object[4];
                 o[0] = resultSet.getString("idps");
                 o[1] = resultSet.getString("jenisps");
-                o[2] = resultSet.getString("namaps");
-                o[3] = resultSet.getString("harga");
+                o[2] = resultSet.getString("harga");
                 model.addRow(o);
             }
             resultSet.close();

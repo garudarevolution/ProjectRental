@@ -25,7 +25,6 @@ public class Transaksi extends javax.swing.JFrame {
         model.addColumn("Mulai Sewa");
         model.addColumn("Lama Sewa");
         model.addColumn("Jenis PS");
-        model.addColumn("Nama PS");
         model.addColumn("Jumlah ");
         model.addColumn(" Harga");
         ambil_data();
@@ -41,15 +40,14 @@ public class Transaksi extends javax.swing.JFrame {
             String sql = "SELECT * FROM sewa";
             ResultSet resultSet = statement.executeQuery(sql);
             while(resultSet.next()) {
-                Object[] o = new Object[8];
+                Object[] o = new Object[7];
                 o[0] = resultSet.getString("idsewa");
                 o[1] = resultSet.getString("namapelanggan");
                 o[2] = resultSet.getString("mulaisewa");
                 o[3] = resultSet.getString("lamasewa");
                 o[4] = resultSet.getString("jenisps");
-                o[5] = resultSet.getString("namaps");
-                o[6] = resultSet.getString("jumlah");
-                o[7] = resultSet.getString("harga");
+                o[5] = resultSet.getString("jumlah");
+                o[6] = resultSet.getString("harga");
                 model.addRow(o);
             }
             resultSet.close();

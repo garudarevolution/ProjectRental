@@ -28,7 +28,6 @@ public class Alat extends javax.swing.JFrame {
         this.jTable1.setModel(model);
         model.addColumn("ID PS");
         model.addColumn("Jenis PS");
-        model.addColumn("Nama PS");
         model.addColumn("Harga ");
         model.addColumn("Jumlah ");
  
@@ -45,12 +44,11 @@ public class Alat extends javax.swing.JFrame {
             String sql = "SELECT * FROM adminps";
             ResultSet resultSet = statement.executeQuery(sql);
             while(resultSet.next()) {
-                Object[] o = new Object[5];
+                Object[] o = new Object[4];
                 o[0] = resultSet.getString("idps");
                 o[1] = resultSet.getString("jenisps");
-                o[2] = resultSet.getString("namaps");
-                o[3] = resultSet.getString("harga");
-                o[4] = resultSet.getString("jumlah");
+                o[2] = resultSet.getString("harga");
+                o[3] = resultSet.getString("jumlah");
                 model.addRow(o);
             }
             resultSet.close();
