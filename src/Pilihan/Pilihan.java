@@ -3,7 +3,6 @@ package Pilihan;
 import DataPeminjam.DataPeminjam;
 import Home.Home;
 import Koneksi.Koneksi;
-import Rental.HitungTransaksi;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,17 +19,15 @@ public class Pilihan extends javax.swing.JFrame {
 
     private DefaultTableModel model;
     Koneksi connect = new Koneksi();
-    HitungTransaksi hitung =  new HitungTransaksi();
 
     public Pilihan() {
         initComponents();
         
-        model = new DefaultTableModel();
+       model = new DefaultTableModel();
         this.jTable1.setModel(model);
-        model.addColumn("ID PS");
+        model.addColumn("ID Ps");
         model.addColumn("Jenis PS");
-        model.addColumn("Harga PS");
- 
+        model.addColumn("Harga ");
         ambil_data();
     }
 
@@ -44,7 +41,7 @@ public class Pilihan extends javax.swing.JFrame {
             String sql = "SELECT * FROM ps";
             ResultSet resultSet = statement.executeQuery(sql);
             while(resultSet.next()) {
-                Object[] o = new Object[4];
+                Object[] o = new Object[3];
                 o[0] = resultSet.getString("idps");
                 o[1] = resultSet.getString("jenisps");
                 o[2] = resultSet.getString("harga");
@@ -55,29 +52,7 @@ public class Pilihan extends javax.swing.JFrame {
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,"Terjadi Kesalahan "+ex.getMessage());
         }  
-        private int hitungTotal()
-        {
-            int total = 0;
-            for (int i = 0; i < jTable1.getRowCount(); i++) 
-            {
-                total = (int) (total + Double.parseDouble(jTable1.getValueAt(i, 1).toString()));
-            }
-            return total;
-        }
-        
-   
-         private String itemList(){
-        String tmp = " ";
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-            tmp += jTable1.getValueAt(i, 0) + " "+jTable1.getValueAt(i, 2).toString()+" "+
-                    (Double.parseDouble(jTable1.getValueAt(i, 1).toString())*Integer.parseInt(jTable1.getValueAt(i, 2).toString()))+"\n";
-        }
-        return tmp;
-    
     }
-
-
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -86,7 +61,7 @@ public class Pilihan extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        Next = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,10 +88,10 @@ public class Pilihan extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Next.setText("Next");
+        Next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                NextActionPerformed(evt);
             }
         });
 
@@ -130,7 +105,7 @@ public class Pilihan extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Next, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(backjbutton4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -149,7 +124,7 @@ public class Pilihan extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backjbutton4)
-                    .addComponent(jButton1))
+                    .addComponent(Next))
                 .addContainerGap())
         );
 
@@ -162,14 +137,12 @@ public class Pilihan extends javax.swing.JFrame {
         new Home().setVisible(true);
     }//GEN-LAST:event_backjbutton4ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
         // TODO add your handling code here:
-            StringBuilder sb =  new StringBuilder();
-            sb.append("Daftar Belanja: \n").append(itemList());
-            sb.append("Total : \n").append(hitungTotal());
-            
-            JOptionPane.showMessageDialog(this, sb, "Detail Penjualan", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        DataPeminjam Info = new DataPeminjam();
+        Info.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_NextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,8 +180,8 @@ public class Pilihan extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Next;
     private javax.swing.JButton backjbutton4;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
