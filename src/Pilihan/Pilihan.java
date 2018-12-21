@@ -3,6 +3,7 @@ package Pilihan;
 import DataPeminjam.DataPeminjam;
 import Home.Home;
 import Koneksi.Koneksi;
+import Rental.HitungTransaksi;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,6 +20,7 @@ public class Pilihan extends javax.swing.JFrame {
 
     private DefaultTableModel model;
     Koneksi connect = new Koneksi();
+    HitungTransaksi hitung =  new HitungTransaksi();
 
     public Pilihan() {
         initComponents();
@@ -53,6 +55,25 @@ public class Pilihan extends javax.swing.JFrame {
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,"Terjadi Kesalahan "+ex.getMessage());
         }  
+        private int hitungTotal()
+        {
+            int total = 0;
+            for (int i = 0; i < jTable1.getRowCount(); i++) 
+            {
+                total = (int) (total + Double.parseDouble(jTable1.getValueAt(i, 1).toString()));
+            }
+            return total;
+        }
+        
+   
+         private String itemList(){
+        String tmp = " ";
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            tmp += jTable1.getValueAt(i, 0) + " "+jTable1.getValueAt(i, 2).toString()+" "+
+                    (Double.parseDouble(jTable1.getValueAt(i, 1).toString())*Integer.parseInt(jTable1.getValueAt(i, 2).toString()))+"\n";
+        }
+        return tmp;
+    
     }
 
 
@@ -81,18 +102,18 @@ public class Pilihan extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID PS", "Jenis PS", "Nama PS", "Harga"
+                "ID PS", "Jenis PS", "Harga"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Next");
+        jButton1.setText("Add");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -143,9 +164,11 @@ public class Pilihan extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        DataPeminjam Info = new DataPeminjam();
-        Info.setVisible(true);
-        setVisible(false);
+            StringBuilder sb =  new StringBuilder();
+            sb.append("Daftar Belanja: \n").append(itemList());
+            sb.append("Total : \n").append(hitungTotal());
+            
+            JOptionPane.showMessageDialog(this, sb, "Detail Penjualan", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
