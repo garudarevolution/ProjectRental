@@ -1,6 +1,9 @@
 package DataPeminjam;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import java.util.Date;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,8 +20,15 @@ public class DataPeminjam extends javax.swing.JFrame {
     /**
      * Creates new form DataPeminjam
      */
+        int code;
+        DateFormat dateFormat;
+        Date date;
     public DataPeminjam() {
         initComponents();
+        dateFormat = new SimpleDateFormat("yyMMdd");
+        date = new Date();
+        code = 0;
+        
     }
 
     /**
@@ -31,7 +41,6 @@ public class DataPeminjam extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -43,18 +52,15 @@ public class DataPeminjam extends javax.swing.JFrame {
         btnkeluar = new javax.swing.JButton();
         btnsimpan = new javax.swing.JButton();
         btnhapus = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jenisps = new javax.swing.JComboBox<>();
+        jTextField1 = new javax.swing.JTextField();
+        NewButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Data Peminjam");
-
-        jLabel2.setText("Tanggal");
 
         jLabel3.setText("Nama");
 
@@ -97,17 +103,18 @@ public class DataPeminjam extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Januari", "Febuari", "Maret", "Apri", "Mei", "Juni", "Juli", "Agutus", "September", "Oktober", "November", "Desember" }));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2018", "2019", "2020", "2021" }));
-
         jLabel10.setText("/ Hari");
 
         jLabel4.setText("PS");
 
         jenisps.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PS 2", "PS 3", "PS 4" }));
+
+        NewButton.setText("Code");
+        NewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,12 +128,12 @@ public class DataPeminjam extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addComponent(NewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jnohp)
@@ -134,12 +141,6 @@ public class DataPeminjam extends javax.swing.JFrame {
                             .addComponent(jalamat)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnsimpan)
                                         .addGap(18, 18, 18)
@@ -151,8 +152,9 @@ public class DataPeminjam extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel10))
                                     .addComponent(jenisps, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(162, 162, 162))
+                                .addGap(0, 20, Short.MAX_VALUE))
+                            .addComponent(jTextField1))))
+                .addGap(142, 142, 142))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,13 +163,11 @@ public class DataPeminjam extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(28, 28, 28)
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(NewButton))
+                        .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jnama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -209,6 +209,22 @@ public class DataPeminjam extends javax.swing.JFrame {
 
     private void btnsimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsimpanActionPerformed
         // TODO add your handling code here:
+        StringBuilder sb = new StringBuilder();
+        sb.append("Code: ").append(dateFormat.format(date)+String.format("%02d", code)).append("\n");
+        sb.append("Nama : ").append(jnama.getText()).append("\n");
+    
+        if (jenisps.getSelectedItem()=="PS 3"){
+            sb.append("PS : PS3").append("\n");
+        }if (jenisps.getSelectedItem()=="PS 2") {
+           sb.append("PS : PS2").append("\n");
+        }if (jenisps.getSelectedItem()=="PS 4") {            
+            sb.append("PS : PS4").append("\n");
+        }
+        sb.append("Alamat : ").append(jalamat.getText()).append("\n");
+        sb.append("No.HP : ").append(jnohp.getText()).append("\n");
+        sb.append("Lama Peminjaman : ").append(jlama.getText()).append(" ").append("Hari");
+        
+        JOptionPane.showMessageDialog(this, sb, "Detail Transaksi", JOptionPane.INFORMATION_MESSAGE);
         JOptionPane.showMessageDialog(rootPane,"Data Tersimpan");
         
     }//GEN-LAST:event_btnsimpanActionPerformed
@@ -228,6 +244,12 @@ public class DataPeminjam extends javax.swing.JFrame {
         jlama.setText("");
         jnohp.setText("");
     }//GEN-LAST:event_btnhapusActionPerformed
+
+    private void NewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewButtonActionPerformed
+        // TODO add your handling code here:
+        code++;
+        jTextField1.setText(dateFormat.format(date)+String.format("%02d", code));
+    }//GEN-LAST:event_NewButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,20 +287,18 @@ public class DataPeminjam extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton NewButton;
     private javax.swing.JButton btnhapus;
     private javax.swing.JButton btnkeluar;
     private javax.swing.JButton btnsimpan;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jalamat;
     private javax.swing.JComboBox<String> jenisps;
     private javax.swing.JTextField jlama;
