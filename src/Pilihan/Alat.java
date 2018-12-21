@@ -5,17 +5,59 @@
  */
 package Pilihan;
 
+import Koneksi.Koneksi;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Serildawn
  */
 public class Alat extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Alat
-     */
+     private DefaultTableModel model;
+    Koneksi connect = new Koneksi();
+    
     public Alat() {
         initComponents();
+        
+        model = new DefaultTableModel();
+        this.jTable1.setModel(model);
+        model.addColumn("ID PS");
+        model.addColumn("Jenis PS");
+        model.addColumn("Nama PS");
+        model.addColumn("Harga ");
+        model.addColumn("Jumlah ");
+ 
+        ambil_data();
+    }
+
+        private void ambil_data(){
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        connect.buka_koneksi();
+        Statement statement;
+        try {
+            statement = Koneksi.getKoneksi().createStatement();
+            String sql = "SELECT * FROM adminps";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next()) {
+                Object[] o = new Object[5];
+                o[0] = resultSet.getString("idps");
+                o[1] = resultSet.getString("jenisps");
+                o[2] = resultSet.getString("namaps");
+                o[3] = resultSet.getString("harga");
+                o[4] = resultSet.getString("jumlah");
+                model.addRow(o);
+            }
+            resultSet.close();
+            statement.close();
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,"Terjadi Kesalahan "+ex.getMessage());
+        }  
     }
 
     /**
@@ -27,34 +69,17 @@ public class Alat extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        editButton2 = new javax.swing.JButton();
         backjbutton4 = new javax.swing.JButton();
-        Hapusbutton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        TambahJbutton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        editButton2.setText("Edit");
-        editButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButton2ActionPerformed(evt);
-            }
-        });
 
         backjbutton4.setText("Back");
         backjbutton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backjbutton4ActionPerformed(evt);
-            }
-        });
-
-        Hapusbutton.setText("Hapus");
-        Hapusbutton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HapusbuttonActionPerformed(evt);
             }
         });
 
@@ -69,17 +94,10 @@ public class Alat extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID Alat", "Jenis Alat", "Harga Alat", "Jumlah Alat"
+                "ID PS", "Jenis PS", "Harga ", "Jumlah"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
-
-        TambahJbutton4.setText("Tambah");
-        TambahJbutton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TambahJbutton4ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,19 +111,9 @@ public class Alat extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(backjbutton4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(102, 102, 102)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(TambahJbutton4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(editButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(63, 63, 63)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                        .addComponent(Hapusbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)))
+                        .addGap(102, 102, 102)
+                        .addComponent(jLabel1)
+                        .addGap(17, 97, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -113,12 +121,7 @@ public class Alat extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editButton2)
-                    .addComponent(TambahJbutton4)
-                    .addComponent(Hapusbutton))
-                .addGap(18, 18, 18)
+                .addGap(71, 71, 71)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(backjbutton4)
@@ -128,30 +131,11 @@ public class Alat extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void editButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButton2ActionPerformed
-        // TODO add your handling code here:
-        
-        dispose();
-        new AlatEdit().setVisible(true);
-            
-    }//GEN-LAST:event_editButton2ActionPerformed
-
     private void backjbutton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjbutton4ActionPerformed
         // TODO add your handling code here:
         dispose();
         new MenuAdmin().setVisible(true);
     }//GEN-LAST:event_backjbutton4ActionPerformed
-
-    private void HapusbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusbuttonActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_HapusbuttonActionPerformed
-
-    private void TambahJbutton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahJbutton4ActionPerformed
-        // TODO add your handling code here:
-        dispose();
-        new AlatTambah().setVisible(true);
-    }//GEN-LAST:event_TambahJbutton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,10 +173,7 @@ public class Alat extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Hapusbutton;
-    private javax.swing.JButton TambahJbutton4;
     private javax.swing.JButton backjbutton4;
-    private javax.swing.JButton editButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
