@@ -20,12 +20,12 @@ public class Transaksi extends javax.swing.JFrame {
         initComponents();
         model = new DefaultTableModel();
         this.jTable1.setModel(model);
-        model.addColumn("ID Transaksi");
+        model.addColumn("Tanggal Kembali");
+        model.addColumn("Tanggal Pinjam");
         model.addColumn("Nama Pelanggan");
-        model.addColumn("Mulai Sewa");
-        model.addColumn("Lama Sewa");
         model.addColumn("Jenis PS");
-        model.addColumn(" Harga");
+        model.addColumn("Alamat");
+        model.addColumn("Nohp");
         ambil_data();
     }
     
@@ -36,16 +36,16 @@ public class Transaksi extends javax.swing.JFrame {
         Statement statement;
         try {
             statement = Koneksi.getKoneksi().createStatement();
-            String sql = "SELECT * FROM sewa";
+            String sql = "SELECT * FROM pengembalian";
             ResultSet resultSet = statement.executeQuery(sql);
             while(resultSet.next()) {
                 Object[] o = new Object[6];
-                o[0] = resultSet.getString("idsewa");
-                o[1] = resultSet.getString("namapelanggan");
-                o[2] = resultSet.getString("mulaisewa");
-                o[3] = resultSet.getString("lamasewa");
-                o[4] = resultSet.getString("jenisps");
-                o[5] = resultSet.getString("harga");
+                o[0] = resultSet.getString("TanggalKembali");
+                o[1] = resultSet.getString("TanggalPinjam");
+                o[2] = resultSet.getString("Nama");
+                o[3] = resultSet.getString("jenisps");
+                o[4] = resultSet.getString("Alamat");
+                o[5] = resultSet.getString("Nohp");
                 model.addRow(o);
             }
             resultSet.close();
@@ -77,13 +77,13 @@ public class Transaksi extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID transaksi", "Nama Pelanggan", "Mulai sewa", "Lama sewa ", "Jenis PS", "Jumlah sewa", "Harga sewa"
+                "TanggalKembali", "TanggalPinjam", "nama", "jenisps", "alamat", "nohp"
             }
         ));
         jScrollPane1.setViewportView(jTable1);

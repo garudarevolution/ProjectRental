@@ -5,11 +5,11 @@
  */
 package Login;
 import Koneksi.Koneksi;
+import Pilihan.HomeUsers;
 import Pilihan.MenuAdmin;
 import javax.swing.JOptionPane;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
-import Pilihan.Pilihan;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -178,7 +178,7 @@ public class Login extends javax.swing.JFrame {
             if (result.next()){
                 JOptionPane.showMessageDialog(null, "LOGIN BERHASIL !");
                 dispose();
-                new Pilihan().setVisible(true);
+                new HomeUsers().setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "LOGIN GAGAL !");
             }        }catch (SQLException ex) {

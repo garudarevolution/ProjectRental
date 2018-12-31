@@ -1,38 +1,54 @@
-package DataPeminjam;
-
-import Koneksi.Koneksi;
-import java.sql.ResultSet;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import javax.swing.JOptionPane;
-import java.util.Date;
-import static javax.management.remote.JMXConnectorFactory.connect;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package DataPeminjam;
+
+import Koneksi.Koneksi;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Asus-Pc
+ * @author Serildawn
  */
-public class DataPeminjam extends javax.swing.JFrame {
+public class Pengembalian extends javax.swing.JFrame {
+    
+    Koneksi connect = new Koneksi();
 
-    /**
-     * Creates new form DataPeminjam
-     */
-        Koneksi connect = new Koneksi();
-        DateFormat dateFormat;
-        Date date;
-        public DataPeminjam() {
+      DateFormat dateFormat;
+      Date date;
+      
+    public Pengembalian() {
         initComponents();
+        ambil_data_alat();
         dateFormat = new SimpleDateFormat("ddMMyy");
         date = new Date();
-
-        
     }
+    private void ambil_data_alat(){
+        connect.buka_koneksi();
+        Statement statement;
+        try {
+            statement = Koneksi.getKoneksi().createStatement();
+            String sql = "SELECT jenisps FROM ps";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next()) {
+                String[] o = new String[1];
+                jenisps.addItem(o[0] = resultSet.getString("jenisps"));
+            }
+            resultSet.close();
+            statement.close();
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,"Terjadi Kesalahan "+ex.getMessage());
+        }  
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,30 +59,24 @@ public class DataPeminjam extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jnama = new javax.swing.JTextField();
         jalamat = new javax.swing.JTextField();
         jnohp = new javax.swing.JTextField();
         btnkeluar = new javax.swing.JButton();
         btnsimpan = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         btnhapus = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jenisps = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
-        TanggalPinjam = new javax.swing.JLabel();
+        jnama = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jTanggal = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Data Peminjam");
-
-        jLabel3.setText("Nama");
-
-        jLabel5.setText("Alamat");
-
-        jLabel6.setText("No.HP");
 
         jnohp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +98,8 @@ public class DataPeminjam extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Data Pengembalian");
+
         btnhapus.setText("Hapus");
         btnhapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,19 +107,26 @@ public class DataPeminjam extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Nama");
+
+        jLabel5.setText("Alamat");
+
         jLabel4.setText("PS");
 
-        jenisps.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PS 2", "PS 3", "PS 4" }));
-        jenisps.setSelectedIndex(-1);
+        jLabel6.setText("No.HP");
 
-        jTextField1.setEnabled(false);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jenisps.setSelectedIndex(-1);
+        jenisps.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jenispsActionPerformed(evt);
             }
         });
 
-        TanggalPinjam.setText("Tanggal Pinjam");
+        jTextField1.setEnabled(false);
+
+        jLabel2.setText("Tanggal Kembali");
+
+        jLabel7.setText("Tanggal Pinjam");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,12 +144,14 @@ public class DataPeminjam extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(jLabel4)
-                            .addComponent(TanggalPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jnohp)
                             .addComponent(jnama)
                             .addComponent(jalamat)
+                            .addComponent(jTextField1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
@@ -140,8 +161,8 @@ public class DataPeminjam extends javax.swing.JFrame {
                                         .addGap(26, 26, 26)
                                         .addComponent(btnkeluar))
                                     .addComponent(jenisps, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 20, Short.MAX_VALUE))
-                            .addComponent(jTextField1))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jTanggal))))
                 .addGap(142, 142, 142))
         );
         layout.setVerticalGroup(
@@ -152,12 +173,16 @@ public class DataPeminjam extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TanggalPinjam))
-                .addGap(26, 26, 26)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jnama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                    .addComponent(jTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jnama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jenisps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -174,35 +199,28 @@ public class DataPeminjam extends javax.swing.JFrame {
                     .addComponent(btnkeluar)
                     .addComponent(btnsimpan)
                     .addComponent(btnhapus))
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnhapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhapusActionPerformed
+    private void jnohpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jnohpActionPerformed
         // TODO add your handling code here:
-        jnama.setText("");
-        jalamat.setText("");
-        jenisps.setSelectedIndex(-1);
-        jnohp.setText("");
-    }//GEN-LAST:event_btnhapusActionPerformed
+    }//GEN-LAST:event_jnohpActionPerformed
+
+    private void btnkeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkeluarActionPerformed
+        // TODO add your handling code here:
+        if(JOptionPane.showConfirmDialog(null,"Anda Yakin?","Confirmation Dialog",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnkeluarActionPerformed
 
     private void btnsimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsimpanActionPerformed
         // TODO add your handling code here:
-        
-        try
-        {
-            connect.buka_koneksi();
-            String sqlkode = jnohp.getText()+"'"+"insert into sewa values ('"+ TanggalPinjam.getText()+"','"+jnama.getText()+"','"+jenisps.getSelectedItem()+"','"+jalamat.getText());
-
-        }
-        catch(Exception e)
-         {
-             JOptionPane.showMessageDialog(null, "Error");
-         }
         StringBuilder sb = new StringBuilder();
-        sb.append("Tanggal Pinjam: ").append(dateFormat.format(date)).append("\n");
+        sb.append("Tanggal Pengembalian: ").append(dateFormat.format(date)).append("\n");
+        sb.append("Tanggal Peminjaman: ").append(jTanggal.getText()).append("\n");
         sb.append("Nama : ").append(jnama.getText()).append("\n");
 
         if (jenisps.getSelectedItem()=="PS 2"){
@@ -213,29 +231,27 @@ public class DataPeminjam extends javax.swing.JFrame {
             sb.append("PS : PS4").append("\n");
         }
         sb.append("Alamat : ").append(jalamat.getText()).append("\n");
-        sb.append("No.HP : ").append(jnohp.getText()).append("\n");
-       
+        sb.append("No.Hp : ").append(jnohp.getText()).append("\n");
+
 
         JOptionPane.showMessageDialog(this, sb, "Data Peminjam", JOptionPane.INFORMATION_MESSAGE);
         JOptionPane.showMessageDialog(rootPane,"Data Tersimpan");
 
     }//GEN-LAST:event_btnsimpanActionPerformed
 
-    private void btnkeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkeluarActionPerformed
+    private void btnhapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhapusActionPerformed
         // TODO add your handling code here:
-        if(JOptionPane.showConfirmDialog(null,"Anda Yakin?","Confirmation Dialog",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
-            System.exit(0);
-        }
-    }//GEN-LAST:event_btnkeluarActionPerformed
+        jTanggal.setText("");
+        jnama.setText("");
+        jalamat.setText("");
+        jenisps.setSelectedIndex(-1);
+        jnohp.setText("");
+    }//GEN-LAST:event_btnhapusActionPerformed
 
-    private void jnohpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jnohpActionPerformed
+    private void jenispsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenispsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jnohpActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-        jTextField1.setText(dateFormat.format(date)+String.format("%02d", TanggalPinjam));
-    }//GEN-LAST:event_jTextField1ActionPerformed
+       
+    }//GEN-LAST:event_jenispsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,34 +270,36 @@ public class DataPeminjam extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DataPeminjam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pengembalian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DataPeminjam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pengembalian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DataPeminjam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pengembalian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DataPeminjam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pengembalian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DataPeminjam().setVisible(true);
+                new Pengembalian().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel TanggalPinjam;
     private javax.swing.JButton btnhapus;
     private javax.swing.JButton btnkeluar;
     private javax.swing.JButton btnsimpan;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JTextField jTanggal;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jalamat;
     private javax.swing.JComboBox<String> jenisps;

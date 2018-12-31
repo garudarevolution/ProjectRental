@@ -134,7 +134,7 @@ public class Pilihan extends javax.swing.JFrame {
     private void backjbutton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjbutton4ActionPerformed
         // TODO add your handling code here:
         dispose();
-        new Home().setVisible(true);
+        new HomeUsers().setVisible(true);
     }//GEN-LAST:event_backjbutton4ActionPerformed
 
     private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
